@@ -1,0 +1,35 @@
+Bug Report:
+
+Summary:
+The "Add Instructor" functionality has several issues, including missing required fields and a fixed department value that cannot be changed. These issues affect the correctness and usability of the functionality.
+
+Description:
+The "Add Instructor" functionality has the following issues:
+
+Missing required fields: The functionality allows some fields such as ID, Account Name, First Name, Middle Name, Academic Title, Email, and Position to be optional. However, some of these fields may be required for the database to make sense. For example, it may not be possible to uniquely identify an instructor without an ID. This issue may cause incorrect data to be added to the database, or missing data that is necessary for other parts of the system.
+
+Fixed department value: The functionality always sets the department to "Admission Office" and does not allow it to be changed. This issue limits the usability of the functionality and may cause confusion among users. Instructors may belong to different departments, and it is necessary to store this information in the database.
+
+Steps to Reproduce:
+
+1. Open the "Add Instructor" functionality.
+2. Leave some of the optional fields blank.
+3. Try to change the department value.
+4. Submit the form.
+
+Expected Results:
+The "Add Instructor" functionality should allow users to add a new instructor with all the necessary information. The form should include all required fields, and users should be able to choose the department that the instructor belongs to.
+
+Actual Results:
+The "Add Instructor" functionality allows some required fields to be left blank and does not allow users to choose the department that the instructor belongs to. This issue may cause incorrect data to be added to the database and limit the functionality of the system.
+
+Possible Fix:
+To fix the issues in the "Add Instructor" functionality, the following changes could be made:
+
+Make all necessary fields required: The form should include all required fields, such as ID, Account Name, First Name, Last Name, Email, and Position. This change would ensure that all necessary data is entered into the database and that the system functions correctly.
+
+Allow users to choose the department: The functionality should allow users to choose the department that the instructor belongs to. This change would improve the usability of the system and allow for more accurate data storage.
+
+Provide clear error messages: If a user leaves a required field blank, the system should provide a clear error message indicating which fields need to be filled in. This change would improve the user experience and help prevent incorrect data from being entered into the system.
+
+Overall, these changes would improve the correctness and usability of the "Add Instructor" functionality, making it more robust and useful for users.
