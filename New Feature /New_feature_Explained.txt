@@ -1,0 +1,17 @@
+The new feature in the code is a method called 'getReservationByStudent(Student student)'. This method allows retrieving a list of reservations associated with a specific student.
+
+Here's how the method works:
+
+1. It takes a 'Student' object as a parameter, representing the student for whom the reservations are being retrieved.
+
+2. The method creates a Hibernate query using 'createQuery' method on the Hibernate session object ('getHibSession()'). The query selects all reservations (`r`) where the instructional offering session's unique identifier matches a specified session ID and the given student is a member of the reservation's students collection.
+
+3. The session ID is set as a named parameter 'sessionId' using the 'setLong' method, which binds the session ID value to the parameter.
+
+4. The student object is set as a named parameter 'student' using the 'setParameter' method, which binds the student object to the parameter.
+
+5. The 'list' method is called on the query to execute it and retrieve a list of reservations that match the specified criteria.
+
+6. The method returns the list of reservations.
+
+This new feature provides a convenient way to retrieve reservations associated with a particular student, allowing for further processing or analysis based on the student's reservations.
