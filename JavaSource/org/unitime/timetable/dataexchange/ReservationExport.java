@@ -195,7 +195,8 @@ public class ReservationExport extends BaseExport {
 	        		if (course.getReservation() != null)
 	        			reservationEl.addAttribute("limit", course.getReservation().toString());
 	        		reservationEl.addAttribute("type", "course");
-	        	} else if (reservation instanceof OverrideReservation) {
+	        	} else
+					if (reservation instanceof OverrideReservation) {
 					OverrideReservation ovRes = (OverrideReservation)reservation;
 					reservationEl.addAttribute("type", ovRes.getOverrideType().getReference());
 					for (Student student: ovRes.getStudents()) {
