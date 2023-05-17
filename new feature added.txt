@@ -1,0 +1,5 @@
+public List<Reservation> getReservationByStudent(Student student) 
+
+JavaSource/org/unitime/timetable/dataexchange/ReservationExport.java
+
+This method retrieves all reservations for a given student for the current session. It takes a Student object as a parameter and returns a List of Reservation objects.

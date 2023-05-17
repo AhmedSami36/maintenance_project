@@ -51,8 +51,9 @@ import org.unitime.timetable.model.StudentGroup;
 import org.unitime.timetable.model.StudentGroupReservation;
 
 /**
- * @author Tomas Muller
- */
+* 	@author Tomas Muller
+*/
+
 public class ReservationExport extends BaseExport {
 	public static String sDateFormat = "MM/dd/yyyy";
 
@@ -194,15 +195,16 @@ public class ReservationExport extends BaseExport {
 	        		if (course.getReservation() != null)
 	        			reservationEl.addAttribute("limit", course.getReservation().toString());
 	        		reservationEl.addAttribute("type", "course");
-	        	} else if (reservation instanceof OverrideReservation) {
-	        		OverrideReservation ovRes = (OverrideReservation)reservation;
-	        		reservationEl.addAttribute("type", ovRes.getOverrideType().getReference());
-	        		for (Student student: ovRes.getStudents()) {
-	        			reservationEl.addElement("student").addAttribute("externalId", student.getExternalUniqueId());
-	        		}
-	        	} else {
-	        		reservationEl.addAttribute("type", "unknown");
-	        	}
+	        	} else
+					if (reservation instanceof OverrideReservation) {
+					OverrideReservation ovRes = (OverrideReservation)reservation;
+					reservationEl.addAttribute("type", ovRes.getOverrideType().getReference());
+					for (Student student: ovRes.getStudents()) {
+						reservationEl.addElement("student").addAttribute("externalId", student.getExternalUniqueId());
+					}
+				} else {
+					reservationEl.addAttribute("type", "unknown");
+				}
 	        }
 	        
             commitTransaction();
@@ -211,5 +213,13 @@ public class ReservationExport extends BaseExport {
             rollbackTransaction();
 		}
 	}
-
+	// adding new feature
+	public List<Reservation> getReservationByStudent(Student student) {
+		List<Reservation> reservations = (List<Reservation>) getHibSession().createQuery(
+						"select r from Reservation r where r.instructionalOffering.session.uniqueId = :sessionId and :student member of r.students")
+				.setLong("sessionId", session.getUniqueId())
+				.setParameter("student", student)
+				.list();
+		return reservations;
+	}
 }
