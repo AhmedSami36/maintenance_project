@@ -168,5 +168,4 @@ public class AcademicClassification extends BaseAcademicClassification {
     			"select count(c) from CurriculumClassification c inner join c.academicClassification f where f.uniqueId = :clasfId")
     			.setLong("clasfId", getUniqueId()).setCacheable(true).uniqueResult()).intValue() > 0;
     }
-    
 }
