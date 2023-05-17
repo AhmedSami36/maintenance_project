@@ -1,0 +1,56 @@
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class ReservationCodeTest {
+
+    @Test
+    public void testReservationCodeBlock() {
+        Reservation reservation = new OverrideReservation();
+        Course course = new Course();
+        // Set up test objects as needed
+        
+        // Create the reservationEl element and perform the code block operations
+        Element reservationEl = new Element("reservation");
+        
+        if (reservation instanceof OverrideReservation) {
+            reservationEl.addAttribute("type", ((OverrideReservation) reservation).getOverrideType().getReference());
+            // Add any other necessary operations for this condition
+        } else if (reservation instanceof IndividualReservation) {
+            reservationEl.addAttribute("type", "individual");
+            // Add any other necessary operations for this condition
+            if (reservation instanceof IndividualOverrideReservation) {
+                // Check for IndividualOverrideReservation and perform necessary operations
+            }
+        } else if (reservation instanceof LearningCommunityReservation) {
+            reservationEl.addAttribute("type", "lc");
+            // Add any other necessary operations for this condition
+        } else if (reservation instanceof StudentGroupReservation) {
+            reservationEl.addAttribute("type", "group");
+            // Add any other necessary operations for this condition
+            if (reservation instanceof GroupOverrideReservation) {
+                // Check for GroupOverrideReservation and perform necessary operations
+            }
+        } else if (reservation instanceof CurriculumReservation) {
+            reservationEl.addAttribute("type", "curriculum");
+            // Add any other necessary operations for this condition
+            if (reservation instanceof CurriculumOverrideReservation) {
+                // Check for CurriculumOverrideReservation and perform necessary operations
+            }
+        } else if (reservation instanceof CourseReservation) {
+            if (course.getReservation() != null) {
+                reservationEl.addAttribute("limit", course.getReservation().toString());
+            }
+            reservationEl.addAttribute("type", "course");
+        } else {
+            reservationEl.addAttribute("type", "unknown");
+        }
+        
+        // Perform assertions to check the correctness of the code block operations
+        assertEquals("The type attribute should be set correctly for the reservation type", "individual", reservationEl.attributeValue("type"));
+        assertNull("The override attribute should not be set for the reservation type", reservationEl.attribute("override"));
+        assertNull("The expired attribute should not be set for the reservation type", reservationEl.attribute("expired"));
+        assertNull("The allowOverlap attribute should not be set for the reservation type", reservationEl.attribute("allowOverlap"));
+        assertNull("The overLimit attribute should not be set for the reservation type", reservationEl.attribute("overLimit"));
+        assertNull("The mustBeUsed attribute should not be set for the reservation type", reservationEl.attribute("mustBeUsed"));
+    }
+}
