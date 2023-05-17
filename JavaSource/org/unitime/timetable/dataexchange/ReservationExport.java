@@ -212,4 +212,13 @@ public class ReservationExport extends BaseExport {
             rollbackTransaction();
 		}
 	}
+	// adding new feature
+	public List<Reservation> getReservationByStudent(Student student) {
+		List<Reservation> reservations = (List<Reservation>) getHibSession().createQuery(
+						"select r from Reservation r where r.instructionalOffering.session.uniqueId = :sessionId and :student member of r.students")
+				.setLong("sessionId", session.getUniqueId())
+				.setParameter("student", student)
+				.list();
+		return reservations;
+	}
 }
