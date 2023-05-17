@@ -182,7 +182,10 @@ public class PeriodPreferencesWidget extends Composite implements HasValue<Perio
 					setTitle("");
 				} else {
 					getElement().getStyle().setBackgroundColor(preference.getColor());
-					setTitle(DateTimeFormat.getFormat(CONSTANTS.examPeriodDateFormat()).format(date) + " " + slot2short(slot) + (period == null ? "" : " - " + slot2short(slot + period.getLength())) + ": " + preference.getName());
+					setTitle(DateTimeFormat.getFormat(CONSTANTS.examPeriodDateFormat()).format(date) + " " + slot2short(slot) + " - " + slot2short(slot + period.getLength()) + ": " + preference.getName());
+				
+					//Old line code : 
+					//setTitle(DateTimeFormat.getFormat(CONSTANTS.examPeriodDateFormat()).format(date) + " " + slot2short(slot) + (period == null ? "" : " - " + slot2short(slot + period.getLength())) + ": " + preference.getName());
 				}
 				if (isEditable())
 					addMouseDownHandler(new MouseDownHandler() {
