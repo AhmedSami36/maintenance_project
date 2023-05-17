@@ -1,0 +1,41 @@
+reasonml
+Copy
+@Test
+public void testCellConstructor() {
+    int day = 1;
+    int slot = 2;
+    Date date = new Date();
+    PeriodInterface period = new Period("P1", 2, 3, 4);
+    TimetableModel model = new TimetableModel();
+    model.addPeriod(period);
+
+    Cell cell = new Cell(day, slot, date, period, model);
+
+    // Verify that the cell properties are set correctly
+    assertEquals("cell", cell.getStyleName());
+    assertEquals("item", cell.getStylePrimaryName());
+    assertEquals("clickable", cell.getStyleSecondaryName());
+    assertNull(cell.getStyleTertiaryName());
+
+    // Verify that the cell content is set correctly
+    assertEquals(day, cell.getDay());
+    assertEquals(slot, cell.getSlot());
+    assertEquals(date, cell.getDate());
+    assertEquals(period, cell.getPeriod());
+
+    // Verify that the cell background color is set correctly based on the preference
+    PreferenceInterface preference = new Preference("pref", "Preference", "#FF0000");
+    model.addPreference(day, slot, preference);
+    cell = new Cell(day, slot, date, period, model);
+    assertEquals("#FF0000", cell.getElement().getStyle().getBackgroundColor());
+
+    // Verify that the cell title is set correctly based on the preference
+    String expectedTitle = DateTimeFormat.getFormat(CONSTANTS.examPeriodDateFormat()).format(date)
+            + " " + slot2short(slot) + " - " + slot2short(slot + period.getLength())
+            + ": " + preference.getName();
+    assertEquals(expectedTitle, cell.getTitle());
+}
+==================================================================================================================
+This test case creates a Cell object with a specified day, slot, date, and period. It then verifies that the cell properties and content are set correctly based on the inputs. The test also sets a preference for the cell and verifies that the cell background color and title are set correctly based on the preference.
+
+Note that the TimetableModel object is passed in as a parameter to the Cell constructor in this test case. This is to ensure that the Cell object has access to the necessary data from the TimetableModel. In a real application, the TimetableModel object would likely be created and managed by a separate class or component.
