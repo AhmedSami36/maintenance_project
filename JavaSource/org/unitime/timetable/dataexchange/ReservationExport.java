@@ -195,14 +195,14 @@ public class ReservationExport extends BaseExport {
 	        			reservationEl.addAttribute("limit", course.getReservation().toString());
 	        		reservationEl.addAttribute("type", "course");
 	        	} else if (reservation instanceof OverrideReservation) {
-	        		OverrideReservation ovRes = (OverrideReservation)reservation;
-	        		reservationEl.addAttribute("type", ovRes.getOverrideType().getReference());
-	        		for (Student student: ovRes.getStudents()) {
-	        			reservationEl.addElement("student").addAttribute("externalId", student.getExternalUniqueId());
-	        		}
-	        	} else {
-	        		reservationEl.addAttribute("type", "unknown");
-	        	}
+					OverrideReservation ovRes = (OverrideReservation)reservation;
+					reservationEl.addAttribute("type", ovRes.getOverrideType().getReference());
+					for (Student student: ovRes.getStudents()) {
+						reservationEl.addElement("student").addAttribute("externalId", student.getExternalUniqueId());
+					}
+				} else {
+					reservationEl.addAttribute("type", "unknown");
+				}
 	        }
 	        
             commitTransaction();
@@ -211,5 +211,4 @@ public class ReservationExport extends BaseExport {
             rollbackTransaction();
 		}
 	}
-
 }
