@@ -51,8 +51,9 @@ import org.unitime.timetable.model.StudentGroup;
 import org.unitime.timetable.model.StudentGroupReservation;
 
 /**
- * @author Tomas Muller
- */
+* 	@author Tomas Muller
+*/
+
 public class ReservationExport extends BaseExport {
 	public static String sDateFormat = "MM/dd/yyyy";
 
