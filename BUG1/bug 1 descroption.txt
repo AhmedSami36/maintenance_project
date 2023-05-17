@@ -1,0 +1,46 @@
+period == null ? "" :
+This condition is unnecessary since it has already been checked on line 3 of the code. To fix this bug, we can remove this unnecessary condition from the setTitle method call 
+
+With this change, the setTitle method call will always pass the correct arguments regardless of whether period is null or not.
+==============================================================================================================
+
+Summary:
+
+The exam period title is displaying incorrectly when a preference is set.
+
+Description:
+
+When a preference is set for an exam period, the title of the period is displayed incorrectly. The current implementation concatenates the start and end times of the exam period, but it does not take into account the length of the period. As a result, the end time is displayed incorrectly.
+
+Steps to Reproduce:
+
+1. Set a preference for an exam period.
+2. Open the exam period in the application.
+
+Expected Results:
+
+The exam period title should display the correct start and end times of the period, as well as the preference name.
+
+Actual Results:
+
+The exam period title displays the correct start time of the period, but the end time is displayed incorrectly due to the bug.
+
+Workaround:
+
+There is no known workaround for this issue at this time.
+
+Technical Details:
+
+The issue is caused by the following line of code in the exam period title display:
+
+`setTitle(DateTimeFormat.getFormat(CONSTANTS.examPeriodDateFormat()).format(date) + " " + slot2short(slot) + (period == null ? "" : " - " + slot2short(slot + period.getLength())) + ": " + preference.getName());`
+
+The current implementation concatenates the start and end times of the exam period, but it does not take into account the length of the period. The fix for this issue is to update the code to include the length of the period in the end time calculation.
+
+Fix:
+
+Update the code to use the following line to correctly calculate the end time of the exam period:
+
+`setTitle(DateTimeFormat.getFormat(CONSTANTS.examPeriodDateFormat()).format(date) + " " + slot2short(slot) + (period == null ? "" : " - " + slot2short(slot + period.getLength() * 60)) + ": " + preference.getName());`
+
+This will correctly calculate the end time of the exam period based on the length of the period, and display it in the title of the period.
